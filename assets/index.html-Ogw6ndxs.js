@@ -1,0 +1,88 @@
+import{_ as s,c as a,a as t,o as i}from"./app-BDGVfunK.js";const e="/taoliblogs/assets/aep0l-yy3ay-BDyAd29O.jpg",l="/taoliblogs/assets/a5tsk-pgkdi-D_0pxWDG.jpg",p="/taoliblogs/assets/a4crr-6e3y9-D7pSR13U.jpg",o="/taoliblogs/assets/admpp-phyls-dvzrQ4jN.jpg",c={};function u(d,n){return i(),a("div",null,n[0]||(n[0]=[t('<h3 id="用户界面基础" tabindex="-1"><a class="header-anchor" href="#用户界面基础"><span>用户界面基础</span></a></h3><ul><li><strong>Android系统的四大组件分别是活动(Activity)、服务(Service)、广播接收器(Broadcast Receiver)、内容提供器(Content Provider)。</strong><br> 其中，活动算是一个程序的门面，活动通过onCreate()方法来对用户界面(UI)进行初始化。而用户界面的创建则分为静态和动态两种方式：</li></ul><ol><li>静态方式即以XML布局文件来定义用户界面，通过XML布局文件中的相关属性进行控制，我将使用这种方式来实现简单的登录界面。</li><li>动态方式是指通过Java代码来开发用户界面，动态地控制界面中的组件。我没有尝试过这种开发方式。</li></ol><ul><li>Android项目工程的结构：<br><img src="'+e+`" alt=""></li><li>补充：</li></ul><ol><li>其中java文件夹下存储有主活动文件MainActivty.java。</li><li>layout文件夹下存储有布局文件activity_main.xml。</li></ol><h3 id="简单登录界面的实现" tabindex="-1"><a class="header-anchor" href="#简单登录界面的实现"><span>简单登录界面的实现</span></a></h3><ul><li>准备完成的功能：</li></ul><ol><li>界面包含两个编辑框，一个用于输入用户名；一个用于输入密码。</li><li>点击登录按钮，若用户名和密码均和点击登录按钮方法中定义的相同，则显示登录成功的提示框，若不同，则提示登录失败。</li></ol><ul><li>按照要求，实现两个输入框，这里我们就需要在XML文件中进行布局，使用EditText控件进行设置。<br> XML布局代码如下：</li></ul><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre><code><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<span class="line">    android:orientation=&quot;vertical&quot;</span>
+<span class="line">    android:layout_height=&quot;match_parent&quot;</span>
+<span class="line">    android:layout_width=&quot;match_parent&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">    &lt;TextView</span>
+<span class="line">        android:id=&quot;@+id/edit_text&quot;</span>
+<span class="line">        android:layout_width=&quot;match_parent&quot;</span>
+<span class="line">        android:layout_height=&quot;wrap_content&quot;</span>
+<span class="line">        android:text=&quot;用户登录界面&quot;</span>
+<span class="line">        android:textAlignment=&quot;center&quot;</span>
+<span class="line">        android:textSize=&quot;24sp&quot; /&gt;</span>
+<span class="line"></span>
+<span class="line">    &lt;TextView</span>
+<span class="line">        android:layout_width=&quot;match_parent&quot;</span>
+<span class="line">        android:layout_height=&quot;wrap_content&quot;</span>
+<span class="line">        android:text=&quot;用户名&quot;</span>
+<span class="line">        android:textAlignment=&quot;center&quot;</span>
+<span class="line">        android:textSize=&quot;24sp&quot; /&gt;</span>
+<span class="line"></span>
+<span class="line">    &lt;EditText</span>
+<span class="line">        android:id=&quot;@+id/username&quot;</span>
+<span class="line">        android:layout_width=&quot;match_parent&quot;</span>
+<span class="line">        android:layout_height=&quot;wrap_content&quot;</span>
+<span class="line">        android:hint=&quot;请输入您的用户名&quot;/&gt;</span>
+<span class="line"></span>
+<span class="line">    &lt;TextView</span>
+<span class="line">        android:layout_width=&quot;match_parent&quot;</span>
+<span class="line">        android:layout_height=&quot;wrap_content&quot;</span>
+<span class="line">        android:text=&quot;密码&quot;</span>
+<span class="line">        android:textAlignment=&quot;center&quot;</span>
+<span class="line">        android:textSize=&quot;24sp&quot; /&gt;</span>
+<span class="line"></span>
+<span class="line">    &lt;EditText</span>
+<span class="line">        android:id=&quot;@+id/password&quot;</span>
+<span class="line">        android:layout_width=&quot;match_parent&quot;</span>
+<span class="line">        android:layout_height=&quot;wrap_content&quot;</span>
+<span class="line">        android:hint=&quot;请输入您的密码&quot;/&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<span class="line">    android:orientation=&quot;vertical&quot;</span>
+<span class="line">    android:layout_height=&quot;match_parent&quot;</span>
+<span class="line">    android:layout_width=&quot;match_parent&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">    &lt;Button</span>
+<span class="line">        android:id=&quot;@+id/login&quot;</span>
+<span class="line">        android:layout_height=&quot;60dp&quot;</span>
+<span class="line">        android:layout_width=&quot;wrap_content&quot;</span>
+<span class="line">        android:text=&quot;登录&quot;</span>
+<span class="line">        android:layout_gravity=&quot;center&quot;</span>
+<span class="line">        android:textAlignment=&quot;center&quot;</span>
+<span class="line">        android:textSize=&quot;18sp&quot; /&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;/LinearLayout&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;/LinearLayout&gt;</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>效果如下：<br><img src="`+l+`" alt=""></li><li>补充：</li></ul><ol><li>LinearLayout代表当前布局方式为线性布局。</li><li>TextView为显示字符串的控件，例如界面上的“用户登录界面”、“用户名”、“密码”就是用TextView实现的。</li><li><strong>Button为按钮控件，即为用户界面添加一个可供点击的按钮，并可在主活动中添加相应的方法实现点击按钮后要进行的操作。</strong></li></ol><ul><li>接下来我们开始编写活动页面的代码，完成点击按钮后的匹配用户名和密码的操作。</li></ul><ol><li><strong>为获取到的Button对象绑定一个监听器button.setOnClickListener()。</strong></li><li><strong>使用接口方式实现监听事件。</strong></li><li>最后在onClick()方法中实现监听事件要实现的逻辑即可。<br> 代码如下：</li></ol><div class="language-java line-numbers-mode" data-highlighter="prismjs" data-ext="java" data-title="java"><pre><code><span class="line"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainActivity</span> <span class="token keyword">extends</span> <span class="token class-name">AppCompatActivity</span> <span class="token keyword">implements</span> <span class="token class-name">View<span class="token punctuation">.</span>OnClickListener</span><span class="token punctuation">{</span></span>
+<span class="line">    <span class="token class-name">Button</span> button<span class="token punctuation">;</span></span>
+<span class="line">    <span class="token class-name">EditText</span> username<span class="token punctuation">;</span></span>
+<span class="line">    <span class="token class-name">EditText</span> password<span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token annotation punctuation">@Override</span></span>
+<span class="line">    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token class-name">Bundle</span> savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        <span class="token function">setContentView</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line">        button <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Button</span><span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>login<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        username <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">EditText</span><span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        password <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">EditText</span><span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        button<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token annotation punctuation">@Override</span></span>
+<span class="line">    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span><span class="token class-name">View</span> v<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token class-name">String</span> username1 <span class="token operator">=</span> username<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        <span class="token class-name">String</span> password1 <span class="token operator">=</span> password<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        <span class="token class-name">String</span> ok <span class="token operator">=</span> <span class="token string">&quot;登录成功&quot;</span><span class="token punctuation">;</span></span>
+<span class="line">        <span class="token class-name">String</span> fail <span class="token operator">=</span> <span class="token string">&quot;登录失败&quot;</span><span class="token punctuation">;</span></span>
+<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span>username1<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;taoli&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> password1<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;123456&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">            <span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token class-name">MainActivity</span><span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span>ok<span class="token punctuation">,</span><span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token constant">LENGTH_SHORT</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="line">            <span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token class-name">MainActivity</span><span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span>fail<span class="token punctuation">,</span><span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token constant">LENGTH_SHORT</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">        <span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>登陆成功效果如下：<br><img src="`+p+'" alt=""></li><li>登录失败效果如下：<br><img src="'+o+'" alt=""></li></ul>',16)]))}const v=s(c,[["render",u],["__file","index.html.vue"]]),k=JSON.parse('{"path":"/docs/guide/Java/2021-12-30-androidkaifazhijiandandenglujiemian/","title":"Android开发之简单登录界面","lang":"en-US","frontmatter":{"title":"Android开发之简单登录界面","date":"2021-12-30","categories":["android","java","blog"],"coverImage":"newlogo.jpg"},"headers":[{"level":3,"title":"用户界面基础","slug":"用户界面基础","link":"#用户界面基础","children":[]},{"level":3,"title":"简单登录界面的实现","slug":"简单登录界面的实现","link":"#简单登录界面的实现","children":[]}],"git":{"createdTime":null,"updatedTime":null,"contributors":[]},"filePathRelative":"docs/guide/Java/2021-12-30-android开发之简单登录界面/index.md"}');export{v as comp,k as data};
