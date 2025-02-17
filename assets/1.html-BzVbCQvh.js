@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as a}from"./app-Cw2o-BxM.js";const n={};function o(c,r){return a(),e("div")}const l=t(n,[["render",o],["__file","1.html.vue"]]),_=JSON.parse('{"path":"/tags/centos7anzhuang/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"git":{},"filePathRelative":null}');export{l as comp,_ as data};
